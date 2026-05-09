@@ -13,11 +13,11 @@ st.info("Upload an image and the AI will create a children's story with audio.")
 # Load AI Models
 @st.cache_resource
 def load_models():
-    # Model 1: Image Captioning
-    captioner = pipeline(model="Salesforce/blip-image-captioning-base")
-    # Model 2: Text Generation
-    story_gen = pipeline(model="gpt2")
+    # 显式指定任务类型和模型，这是最稳妥的写法
+    captioner = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
+    story_gen = pipeline("text-generation", model="gpt2")
     return captioner, story_gen
+
 
 captioner, story_gen = load_models()
 
